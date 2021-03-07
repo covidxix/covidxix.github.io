@@ -1,44 +1,116 @@
-<html>
-  <head>
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
 <style>
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar {
   overflow: hidden;
   background-color: #333;
-}
-
-li {
   font-family: Rubik;
-  float: left;
 }
 
-li a {
-  display: block;
+.navbar a {
+  float: left;
+  font-size: 16px;
   color: white;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
 }
 
-li a:hover {
-  background-color: #111;
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 </style>
 </head>
-<ul>
-  <li><a class="active" href="index.html">Home</a></li>
-  <li><a href="#daily_average">Daily Average</a></li>
-  <li><a href="#change_cases">Change Cases</a></li>
-  <li><a href="#ecdc_cases">ECDC Cases Notification Rate (new!)</a></li>
-  <li><a href="#pcr_positivity">PCR Positivity</a></li>
-  <li><a href="#pcr_tests">PCR Tests</a></li>
-  <li><a href="#cumulative_deaths">Deaths per 100k</a></li>
-  <li><a href="#municipal_notification">Cases per Municipality (new!)</a></li>
-  <li><a href="#week_change">Municipality, weekly change</a></li>
-</ul>
+<body>
+
+<div class="navbar">
+  <a href="index.html">Home</a>
+  <div class="dropdown">
+    <button class="dropbtn">Cases
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="#daily_average">Daily Average</a>
+      <a href="#change_cases">Change Cases</a>
+      <a href="#ecdc_cases">ECDC Cases Notification Rate (new!)</a>
+    </button>
+  </div>
+  </div> 
+ <div class="dropdown">
+  <button class="dropbtn">Testing
+      <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-content">
+  <a href="#pcr_positivity">PCR Positivity</a>
+  <a href="#pcr_tests">PCR Tests</a>
+  </div>
+</div>
+ <div class="dropdown">
+  <button class="dropbtn">Deaths
+      <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-content">
+  <a href="#cumulative_deaths">Deaths per 100k</a>
+  </div>
+</div>
+ <div class="dropdown">
+  <button class="dropbtn">Municipality Maps
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-content">
+  <a href="#municipal_notification">Cases per Municipality (new!)</a>
+  <a href="#week_change">Municipality, weekly change</a>
+  </div>
+</div>
+</div>
 
 <iframe title="Summary Map - Covid-19 in Sweden" aria-label="Map" id="datawrapper-chart-iq538" src="https://datawrapper.dwcdn.net/iq538/1/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="784"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(a){if(void 0!==a.data["datawrapper-height"])for(var e in a.data["datawrapper-height"]){var t=document.getElementById("datawrapper-chart-"+e)||document.querySelector("iframe[src*='"+e+"']");t&&(t.style.height=a.data["datawrapper-height"][e]+"px")}}))}();
 </script>
@@ -81,3 +153,5 @@ li a:hover {
 <a name="week_change"></a> 
 <iframe title="New Cases per Municipality, Weekly Change" aria-label="Map" id="datawrapper-chart-pQ0lJ" src="https://datawrapper.dwcdn.net/pQ0lJ/1/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="784"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(a){if(void 0!==a.data["datawrapper-height"])for(var e in a.data["datawrapper-height"]){var t=document.getElementById("datawrapper-chart-"+e)||document.querySelector("iframe[src*='"+e+"']");t&&(t.style.height=a.data["datawrapper-height"][e]+"px")}}))}();
 </script>
+</body>
+</html>
