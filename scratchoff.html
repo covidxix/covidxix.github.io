@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700italic,700' rel='stylesheet' type='text/css'> 
+  <script src="https://kit.fontawesome.com/79a315835a.js" crossorigin="anonymous"></script>
+  <title>Covid-19 Scratch-off</title>
+  <link rel="stylesheet" href="lottstyle.css">
+  <link rel="icon" href="assets/shield-virus-light.svg" type="image/gif" sizes="16x16"> 
+  <!-- import jQuery -->
+  <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+  
+  <!-- The scratch off code, found at https://jennamolby.com/interactive-scratch-and-win-landing-page-tutorial/ -->
+  <script type="text/javascript" src="wScratchPad.min.js"></script>
+
+</head>
+
+<body>
+  <!-- External links in a horizontal list -->
+  <div class="menu">
+  <div class="toplist">
+    <ul id="menu">
+    <li><a href="https://covidxix.github.io"><i class="fa fa-home"></i></a></li>
+    <li><a href="https://twitter.com/CovidXIX" target="_blank"><i class="fa fa-twitter"></i>@CovidXIX</a></li>
+    <li><a href="https://patreon.com/CovidXIX" target="_blank"></i><i class="fab fa-patreon"></i> Patreon</a></li>
+    <li><a href="https://docs.google.com/spreadsheets/d/1LgwvAmSgOfMf4sgWD1gC0obFlKR7ETr3mMSJtuiQsZ0/edit#gid=776113998&range=A1" target="_blank"><i class="far fa-file-spreadsheet"></i></a></li>
+    <li><a href="help.html"><i class="far fa-question-square"></i></a></li>
+    </ul>
+    <hr>
+  </div>
+<!-- Dropdown menu for difficulty (from w3c) -->
+<!-- Top Navigation Menu -->
+<div class="topnav">
+  <a href="#home" class="setdiff">Set difficulty</a>
+  <!-- Navigation links (hidden by default) -->
+  <div id="difficulties">
+    <a href="#" class="ageselect" onclick="setAge(getRandomIntInclusive(1, 11));sessionStorage.removeItem('selected');window.location.reload()">Random Age</a>
+    <a href="#" class="ageselect" onclick="setAge(1);window.location.reload()">Simple (0-9)</a>
+    <a href="#" class="ageselect" onclick="setAge(2);window.location.reload()">Very Easy (10-19)</a>
+    <a href="#" class="ageselect" onclick="setAge(3);window.location.reload()">Easy (20-29)</a>
+    <a href="#" class="ageselect" onclick="setAge(4);window.location.reload()">Medium (30-39)</a>
+    <a href="#" class="ageselect" onclick="setAge(5);window.location.reload()">Hard (40-49)</a>
+    <a href="#" class="ageselect" onclick="setAge(6);window.location.reload()">Very Hard (50-59)</a>
+    <a href="#" class="ageselect" onclick="setAge(7);window.location.reload()">Super Hard (60-69)</a>
+    <a href="#" class="ageselect" onclick="setAge(8);window.location.reload()">Ridiculously Hard (70-79)</a>
+    <a href="#" class="ageselect" onclick="setAge(9);window.location.reload()">Nightmare (80-89)</a>
+    <a href="#" class="ageselect" onclick="setAge(10);window.location.reload()">Hell (90+)</a>
+    <a href="#" class="ageselect" onclick="setAge(11);window.location.reload()">Default (Any Age)</a>
+  </div>
+  <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
+  <a href="javascript:void(0);" class="icon">
+    <i class="fa fa-bars"></i>
+  </a>
+</div>
+
+<!-- Display -->
+<!-- area for displaying the difficulty (set in script)-->
+<p id="toptext">using difficulty: </p>
+  </div>
+<div class="results-container" style="display:none;">
+  <div class="results"></div>
+  <a href="scratchoff.html" class="btn">Play Again</a>
+  <a href="tables.html" class="btn">See win table</a>
+</div>
+<div class="scratch-container">
+  <div id="game" class="scratchpad"></div>
+</div>
+ 
+<script type="text/javascript">
+// function to get random numbers min/max, from 
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  //console.log(min,max);
+  return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
+} 
+
+function setAge(age) {
+  // should for sure have made this into objects instead...
+  // function to get the outcome numbers/win tables for each age group
+    //console.log("setAge function");
+    //console.log(age);
+    if (age == 1) {
+      myAge = ["0-9", 9, 43, 738, 30725, 31420, "win_table5.png", "win_table4.png", "win_table2.png"]
+      sessionStorage.setItem('selected', age);
+      //console.log(myAge);
+    } else if (age == 2) {
+      myAge = ["10-19", 5, 54, 712, 148674, 149332, "win_table6.png", "win_table5.png", "win_table3.png"]
+      sessionStorage.setItem('selected', age);
+      //console.log(myAge);
+    } else if (age == 3) {
+      myAge = ["20-29", 22, 226, 2723, 195402, 197899, "win_table5.png", "win_table4.png", "win_table3.png"]
+      sessionStorage.setItem('selected', age);
+      //console.log(myAge);
+    } else if (age == 4) {
+      myAge = ["30-39", 47, 399, 4975, 194475, 199051, "win_table5.png", "win_table4.png", "win_table2.png"]
+      sessionStorage.setItem('selected', age);
+      //console.log(myAge);
+    } else if (age == 5) {
+      myAge = ["40-49", 119, 948, 7984, 196599, 203635, "win_table5.png", "win_table3.png", "win_table2.png"]
+      sessionStorage.setItem('selected', age);
+      //console.log(myAge);
+    } else if (age == 6) {
+      myAge = ["50-59", 377, 2044, 13237, 165426, 176619, "win_table4.png", "win_table3.png", "win_table2.png"]
+      sessionStorage.setItem('selected', age);
+      //console.log(myAge);
+    } else if (age == 7) {
+      myAge = ["60-69", 1037, 3250, 15210, 77111, 89071, "win_table3.png", "win_table2.png", "win_table1.png"]
+      sessionStorage.setItem('selected', age);
+      //console.log(myAge);
+    } else if (age == 8) {
+      myAge = ["70-79", 3289, 5205, 19039, 26725, 40559, "win_table2.png", "win_table2.png", "win_table1.png"]
+      sessionStorage.setItem('selected', age);
+      //console.log(myAge);
+    } else if (age == 9) {
+      myAge = ["80-89", 5976, 6403, 18041, 13047, 24685, "win_table1.png", "win_table2.png", "win_table1.png"]
+      sessionStorage.setItem('selected', age);
+      //console.log(myAge);
+    } else if (age == 10) {
+      myAge = ["90+", 3804, 3814, 7845, 7009, 11040, "win_table1.png", "win_table4.png", "win_table1.png"]
+      sessionStorage.setItem('selected', age);
+      //console.log(myAge);
+    } else if (age == 11) {
+      myAge = ["Any Age", 14685, 22386, 90504, 1055193, 1123311, "win_table2.png", "win_table3.png", "win_table2.png"]
+      sessionStorage.setItem('selected', age);
+      //console.log(myAge);
+    }
+    document.getElementById("toptext").innerHTML = "Difficulty: " + myAge[0];
+    return myAge;
+  }
+
+function randomizeOutcome(myAge) {
+  // randomize outcome between nothing/something
+  var winLoss = Math.floor(Math.random() * (myAge[5] - 1 + 1) + 1);
+  //console.log("winloss (ie: something/nothing): " +winLoss)
+  //console.log("winloss cutoff: "+myAge[4])
+  if (winLoss < myAge[4]) {
+      var ageBG = 'triss_nothing.png';
+      var rOutcome = 'NOTHING';
+      var winTable = 'win_table7.png';
+      //console.log("winloss: " + winLoss);
+      //console.log("Outcome: Nothing");
+  } else if (winLoss > myAge[4]) {
+    var rollOutcome = Math.floor(Math.random() * (myAge[3] - 1 + 1) + 1);
+    //console.log("outcome, event: " + rollOutcome);
+  }
+  return {
+    ageBG,
+    rOutcome,
+    rollOutcome,
+    winLoss,
+    winTable
+  } 
+}
+
+function randomOutcome(rollOutcome, myAge) {
+  // randomize outcome when prior random is not nothing
+  // who knows why this isn't one function...
+  if (rollOutcome < myAge[1]) {
+    // randomized to death outcome - random < index1 in age list
+    ageBG = 'triss_death.png';
+    //console.log(myAge[1]);
+    //console.log('win table: ' +myAge[6]);
+    var winTable = myAge[6];
+    var rOutcome = 'DEATH';
+    } else if (rollOutcome > myAge[1] && rollOutcome < myAge[2]) {
+    // randomized to IVA outcome - index3 < random > index2  in age list
+      //console.log(myAge[1], myAge[2]);
+      //console.log('win table: ' +myAge[7]);
+      winTable = myAge[7];
+      ageBG = 'assets/triss_IVA.png';
+      rOutcome = 'IVA';
+    } else if (rollOutcome > myAge[2] && rollOutcome < myAge[3]) {
+    // randomized to hospital outcome - index2 < random > index3  in age list
+      //console.log(myAge[2], myAge[3]);
+      winTable = myAge[8];
+      ageBG = 'assets/triss_hospital.png';
+      //console.log("win table: " +myAge[8]);
+      rOutcome = 'HOSPITAL';
+    } else {
+      // don't remember why I do this, shouldn't be needed, error tracking probably
+      ageBG = "assets/triss_nothing.png";
+    }
+    return {
+      ageBG,
+      rOutcome,
+      winTable
+    }
+}
+
+// random age groups if user hasn't made a menu pick
+// uses sessionStorage to store user selected difficulty
+if (sessionStorage.getItem("selected") === null) {
+  // if it hasn't been set by user, run random ages until picked
+  var selectedAge = setAge(getRandomIntInclusive(1, 11));
+  var short = sessionStorage.getItem('selected');
+  sessionStorage.removeItem('selected');
+} else {
+  // if sessionStorage is used, keep using that age group in setAge
+  myAge = setAge(sessionStorage.getItem('selected'));
+  var short = sessionStorage.getItem('test2');
+
+}
+
+//console.log('Running');
+
+// if outcome is not nothing, run a second randomizer to find the actual outcome
+var randomizer = randomizeOutcome(myAge);
+//console.log(randomizer.ageBG)
+var ageBG = randomizer.ageBG;
+var rOutcome = randomizer.rOutcome;
+var rollOutcome = randomizer.rollOutcome;
+var winLoss = randomizer.winLoss;
+var winTable = randomizer.winTable;
+//console.log("from randomizer, win table: " + winTable);
+//console.log("from randomizer, ageBG: "+ ageBG);
+
+results = randomOutcome(rollOutcome, myAge);
+ageBG = results.ageBG;
+if (winTable != "win_table7.png") {
+  winTable = results.winTable;
+} else {
+  //pass;
+}
+if (rOutcome != "NOTHING") {
+  rOutcome = results.rOutcome;
+} else {
+  //pass;
+}
+//console.log(winTable);
+
+rollOutcome = winLoss;      
+
+// actual scratch off jquery code, from https://jennamolby.com/interactive-scratch-and-win-landing-page-tutorial/
+$('#game').wScratchPad({
+    // the size of the eraser
+    size        : 70,    
+    // the randomized scratch image   
+    bg:  ageBG,
+    // give real-time updates
+    realtime    : true, 
+    // The overlay image
+    fg: 'assets/triss_blank.png',
+    // The cursor (coin) image
+    'cursor': 'url("assets/coin1.png") 5 5, default',
+    
+    scratchMove: function (e, percent) {
+        // Show the plain-text promo code and call-to-action when the scratch area is 50% scratched
+        if ((percent > 40) && (rOutcome != '')) {
+          $('.results-container').slideDown(1000, "swing");
+          $('body').removeClass('not-selectable');
+            $('.results').html('Age: <b>' + myAge[0] + '</b> Outcome: <b>' + rOutcome + 
+              '<img id=winning src=assets/' + winTable + ' padding-top: 100 width=450>'
+              );
+            }
+        }
+ });
+</script>
+
+<script>
+// show/hide the menu when hamburger menu is clicked
+$(".icon").on("click", function () {
+  $("#difficulties").slideToggle();
+});
+
+// hide the menu when an age bracket is clicked
+$(".ageselect").on("click", function(){
+    $("#difficulties").slideToggle(); 
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<style type="text/css">
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+.scratchpad{
+  width: 450px;
+  height: 445px;
+  border: solid 10px #FFFFFF;
+  margin:0 auto;
+}
+.menu{
+  width: 450px;
+  height: 145px;
+  border: solid 10px #FFFFFF;
+  margin:0 auto;
+  background-color: #04AA6D;
+  font-family: Inconsolata, Monospace !important;
+}
+
+img#winning {
+  padding-top: 10px;
+}
+
+p {
+  padding: 0px 0px 0px 16px;
+  font-size: 1em;
+}
+
+ /* Style the navigation menu */
+.topnav {
+  overflow: hidden;
+  position: relative;
+  z-index: 9999999;
+}
+
+/* Hide the links inside the navigation menu (except for logo/home) */
+.topnav #difficulties{
+  display: none;
+}
+
+/* Style navigation menu links */
+.topnav a {
+  color: white;
+  background-color: #333;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  display: block;
+}
+
+.setdiff {
+  background-color: #04AA6D !important;
+}
+/* Style navigation menu links */
+.toplist a {
+  color: white;
+  padding: 14px 8px;
+  margin-bottom: 20px;
+  text-decoration: none;
+  font-size: 17px;
+  background-color: #04AA6D;
+  color: white;
+}
+
+/* Style the hamburger menu */
+.topnav a.icon {
+  background: black;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+ul#menu li {
+  display:inline;
+  margin: 0;
+  padding: 0 !important;
+  background-color: #333;
+}
+
+.toplist a:hover {
+  text-decoration: underline;
+  color: black;
+}
+
+/* Add a grey background color on mouse-over */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.toptext {
+  font-size: 33px;
+}
+
+/* Style the active link (or home/logo) */
+.active {
+  background-color: #04AA6D;
+  color: white;
+}
+body {
+    background:#efefef;
+}
+.scratch-container {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width:100%;
+}
+@media only screen and (max-width : 480px) {
+  .scratchpad {width:400px;height:396px;}
+  .scratch-container {width:400px !important;}
+}
+ 
+/* Custom, iPhone Retina */ 
+@media only screen and (max-width : 320px) {
+  .scratchpad {width:290px;height:287px;}
+  .scratch-container {width:290px !important;}
+}
+.results-container {
+  transition: opacity 1s ease-out;
+  overflow: hidden;
+	background:#FFF;
+	border-radius:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	width:450px;
+	padding:10px 10px;
+	margin:0 auto;
+	text-align:center;
+	font-family:'Open Sans', Arial,Sans-serif;
+	color:#333;
+	font-size:16px;
+	margin-top:20px;
+}
+.btn {
+  background:#56CFD2;
+  color:#FFF;
+  padding:10px 25px;
+  display:inline-block;
+  margin-top:15px;
+  text-decoration:none;
+  font-weight:600;
+  text-transform:uppercase;
+  border-radius:3px;
+  -moz-border-radius:3px;
+  -webkit-border-radiuss:3px;
+}
+/* Popup container - can be anything you want */
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+  </style>
