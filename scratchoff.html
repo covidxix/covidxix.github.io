@@ -72,59 +72,45 @@
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
-  //console.log(min,max);
   return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
 } 
 
 function setAge(age) {
   // should for sure have made this into objects instead...
   // function to get the outcome numbers/win tables for each age group
-    //console.log("setAge function");
-    //console.log(age);
     if (age == 1) {
       myAge = ["0-9", 9, 43, 738, 30725, 31420, "win_table5.png", "win_table4.png", "win_table2.png"]
       sessionStorage.setItem('selected', age);
-      //console.log(myAge);
     } else if (age == 2) {
       myAge = ["10-19", 5, 54, 712, 148674, 149332, "win_table6.png", "win_table5.png", "win_table3.png"]
       sessionStorage.setItem('selected', age);
-      //console.log(myAge);
     } else if (age == 3) {
       myAge = ["20-29", 22, 226, 2723, 195402, 197899, "win_table5.png", "win_table4.png", "win_table3.png"]
       sessionStorage.setItem('selected', age);
-      //console.log(myAge);
     } else if (age == 4) {
       myAge = ["30-39", 47, 399, 4975, 194475, 199051, "win_table5.png", "win_table4.png", "win_table2.png"]
       sessionStorage.setItem('selected', age);
-      //console.log(myAge);
     } else if (age == 5) {
       myAge = ["40-49", 119, 948, 7984, 196599, 203635, "win_table5.png", "win_table3.png", "win_table2.png"]
       sessionStorage.setItem('selected', age);
-      //console.log(myAge);
     } else if (age == 6) {
       myAge = ["50-59", 377, 2044, 13237, 165426, 176619, "win_table4.png", "win_table3.png", "win_table2.png"]
       sessionStorage.setItem('selected', age);
-      //console.log(myAge);
     } else if (age == 7) {
       myAge = ["60-69", 1037, 3250, 15210, 77111, 89071, "win_table3.png", "win_table2.png", "win_table1.png"]
       sessionStorage.setItem('selected', age);
-      //console.log(myAge);
     } else if (age == 8) {
       myAge = ["70-79", 3289, 5205, 19039, 26725, 40559, "win_table2.png", "win_table2.png", "win_table1.png"]
       sessionStorage.setItem('selected', age);
-      //console.log(myAge);
     } else if (age == 9) {
       myAge = ["80-89", 5976, 6403, 18041, 13047, 24685, "win_table1.png", "win_table2.png", "win_table1.png"]
       sessionStorage.setItem('selected', age);
-      //console.log(myAge);
     } else if (age == 10) {
       myAge = ["90+", 3804, 3814, 7845, 7009, 11040, "win_table1.png", "win_table4.png", "win_table1.png"]
       sessionStorage.setItem('selected', age);
-      //console.log(myAge);
     } else if (age == 11) {
       myAge = ["Any Age", 14685, 22386, 90504, 1055193, 1123311, "win_table2.png", "win_table3.png", "win_table2.png"]
       sessionStorage.setItem('selected', age);
-      //console.log(myAge);
     }
     document.getElementById("toptext").innerHTML = "Difficulty: " + myAge[0];
     return myAge;
@@ -133,17 +119,12 @@ function setAge(age) {
 function randomizeOutcome(myAge) {
   // randomize outcome between nothing/something
   var winLoss = Math.floor(Math.random() * (myAge[5] - 1 + 1) + 1);
-  //console.log("winloss (ie: something/nothing): " +winLoss)
-  //console.log("winloss cutoff: "+myAge[4])
   if (winLoss < myAge[4]) {
       var ageBG = 'triss_nothing.png';
       var rOutcome = 'NOTHING';
       var winTable = 'win_table7.png';
-      //console.log("winloss: " + winLoss);
-      //console.log("Outcome: Nothing");
   } else if (winLoss > myAge[4]) {
     var rollOutcome = Math.floor(Math.random() * (myAge[3] - 1 + 1) + 1);
-    //console.log("outcome, event: " + rollOutcome);
   }
   return {
     ageBG,
@@ -160,23 +141,17 @@ function randomOutcome(rollOutcome, myAge) {
   if (rollOutcome < myAge[1]) {
     // randomized to death outcome - random < index1 in age list
     ageBG = 'triss_death.png';
-    //console.log(myAge[1]);
-    //console.log('win table: ' +myAge[6]);
     var winTable = myAge[6];
     var rOutcome = 'DEATH';
     } else if (rollOutcome > myAge[1] && rollOutcome < myAge[2]) {
     // randomized to IVA outcome - index3 < random > index2  in age list
-      //console.log(myAge[1], myAge[2]);
-      //console.log('win table: ' +myAge[7]);
       winTable = myAge[7];
       ageBG = 'assets/triss_IVA.png';
       rOutcome = 'IVA';
     } else if (rollOutcome > myAge[2] && rollOutcome < myAge[3]) {
     // randomized to hospital outcome - index2 < random > index3  in age list
-      //console.log(myAge[2], myAge[3]);
       winTable = myAge[8];
       ageBG = 'assets/triss_hospital.png';
-      //console.log("win table: " +myAge[8]);
       rOutcome = 'HOSPITAL';
     } else {
       // don't remember why I do this, shouldn't be needed, error tracking probably
@@ -203,18 +178,13 @@ if (sessionStorage.getItem("selected") === null) {
 
 }
 
-//console.log('Running');
-
 // if outcome is not nothing, run a second randomizer to find the actual outcome
 var randomizer = randomizeOutcome(myAge);
-//console.log(randomizer.ageBG)
 var ageBG = randomizer.ageBG;
 var rOutcome = randomizer.rOutcome;
 var rollOutcome = randomizer.rollOutcome;
 var winLoss = randomizer.winLoss;
 var winTable = randomizer.winTable;
-//console.log("from randomizer, win table: " + winTable);
-//console.log("from randomizer, ageBG: "+ ageBG);
 
 results = randomOutcome(rollOutcome, myAge);
 ageBG = results.ageBG;
@@ -228,7 +198,6 @@ if (rOutcome != "NOTHING") {
 } else {
   //pass;
 }
-//console.log(winTable);
 
 rollOutcome = winLoss;      
 
@@ -269,5 +238,7 @@ $(".ageselect").on("click", function(){
     $("#difficulties").slideToggle(); 
 });
 </script>
+<a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fcovidxix.github.io%2Fscratchoff.html&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false"/></a>
+
 </body>
 </html>
