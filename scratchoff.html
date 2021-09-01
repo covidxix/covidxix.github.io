@@ -32,21 +32,24 @@
 <!-- Dropdown menu for difficulty (from w3c) -->
 <!-- Top Navigation Menu -->
 <div class="topnav">
-  <a href="#home" class="setdiff">Set difficulty</a>
+  <a href="javascript:void(0);" class="setdiff">Set difficulty</a>
   <!-- Navigation links (hidden by default) -->
   <div id="difficulties">
     <a href="#" class="ageselect" onclick="setAge(getRandomIntInclusive(1, 11));sessionStorage.removeItem('selected');window.location.reload()">Random Age</a>
-    <a href="#" class="ageselect" onclick="setAge(1);window.location.reload()">Simple (0-9)</a>
-    <a href="#" class="ageselect" onclick="setAge(2);window.location.reload()">Very Easy (10-19)</a>
+    <a href="#" class="ageselect" onclick="setAge(2);window.location.reload()">Simple (10-19)</a>
     <a href="#" class="ageselect" onclick="setAge(3);window.location.reload()">Easy (20-29)</a>
+    <a href="#" class="ageselect" onclick="setAge(1);window.location.reload()">Very Easy (0-9)</a>
     <a href="#" class="ageselect" onclick="setAge(4);window.location.reload()">Medium (30-39)</a>
     <a href="#" class="ageselect" onclick="setAge(5);window.location.reload()">Hard (40-49)</a>
-    <a href="#" class="ageselect" onclick="setAge(6);window.location.reload()">Very Hard (50-59)</a>
-    <a href="#" class="ageselect" onclick="setAge(7);window.location.reload()">Super Hard (60-69)</a>
-    <a href="#" class="ageselect" onclick="setAge(8);window.location.reload()">Ridiculously Hard (70-79)</a>
-    <a href="#" class="ageselect" onclick="setAge(9);window.location.reload()">Nightmare (80-89)</a>
-    <a href="#" class="ageselect" onclick="setAge(10);window.location.reload()">Hell (90+)</a>
-    <a href="#" class="ageselect" onclick="setAge(11);window.location.reload()">Default (Any Age)</a>
+    <a href="#" class="ageselect" onclick="setAge(11);window.location.reload()">Very Hard (Any Age)</a>
+    <a href="#" class="ageselect" onclick="setAge(6);window.location.reload()">Super Hard (50-59)</a>
+    <a href="#" class="ageselect" onclick="setAge(7);window.location.reload()">Ridiculously Hard (60-69)</a>
+    <a href="#" class="ageselect" onclick="setAge(8);window.location.reload()">Impossible (70-79)</a>
+    <a href="#" class="ageselect" onclick="setAge(10);window.location.reload()">Nightmare (90+)</a>
+    <a href="#" class="ageselect" onclick="setAge(9);window.location.reload()">Hell (80-89)</a>
+  </div>
+  <div id="options">
+    <a href="#" class="option" onclick="doOption(1)">Remove History</a>
   </div>
   <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
   <a href="javascript:void(0);" class="icon">
@@ -58,13 +61,13 @@
 <!-- area for displaying the difficulty (set in script)-->
 <p id="toptext">using difficulty: </p>
   </div>
-<div class="results-container" style="display:none;">
-  <div class="results"></div>
-  <a href="scratchoff.html" class="btn">Play Again</a>
-  <a href="tables.html" class="btn">See win table</a>
-</div>
 <div class="scratch-container">
   <div id="game" class="scratchpad"></div>
+<div class="results-container" style="display:none;">
+  <div class="results"></div>
+    <a href="scratchoff.html" class="btn">Play Again</a>
+    <a href="tables.html" class="btn">See win table</a>
+</div>
 </div>
  
 <script type="text/javascript">
@@ -74,6 +77,17 @@ function getRandomIntInclusive(min, max) {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
 } 
+
+function doOption(selection) {
+  if (selection == 1) {
+    sessionStorage.removeItem("historyGames");
+    sessionStorage.removeItem("historyNothing");
+    sessionStorage.removeItem("historyIVA");
+    sessionStorage.removeItem("historyDeath");
+    sessionStorage.removeItem("historyHospital");
+    sessionStorage.removeItem("outcomeHistory");
+  }
+}
 
 function setAge(age) {
   // should for sure have made this into objects instead...
@@ -123,9 +137,13 @@ function randomizeOutcome(myAge) {
       var ageBG = 'triss_nothing.png';
       var rOutcome = 'NOTHING';
       var winTable = 'win_table7.png';
+      hNothing += 1;
+      sessionStorage.setItem("historyNothing", hNothing);
   } else if (winLoss > myAge[4]) {
     var rollOutcome = Math.floor(Math.random() * (myAge[3] - 1 + 1) + 1);
   }
+  hGames += 1;
+  sessionStorage.setItem("historyGames", hGames);
   return {
     ageBG,
     rOutcome,
@@ -143,16 +161,22 @@ function randomOutcome(rollOutcome, myAge) {
     ageBG = 'assets/triss_death.png';
     var winTable = myAge[6];
     var rOutcome = 'DEATH';
+    hDeath += 1;
+    sessionStorage.setItem("historyDeath", hDeath);
     } else if (rollOutcome > myAge[1] && rollOutcome < myAge[2]) {
     // randomized to IVA outcome - index3 < random > index2  in age list
       winTable = myAge[7];
       ageBG = 'assets/triss_IVA.png';
       rOutcome = 'IVA';
+      hIVA += 1;
+      sessionStorage.setItem("historyIVA", hIVA);
     } else if (rollOutcome > myAge[2] && rollOutcome < myAge[3]) {
     // randomized to hospital outcome - index2 < random > index3  in age list
       winTable = myAge[8];
       ageBG = 'assets/triss_hospital.png';
       rOutcome = 'HOSPITAL';
+      hHospital += 1;
+      sessionStorage.setItem("historyHospital", hHospital);
     } else {
       // don't remember why I do this, shouldn't be needed, error tracking probably
       ageBG = "assets/triss_nothing.png";
@@ -175,6 +199,29 @@ if (sessionStorage.getItem("selected") === null) {
   // if sessionStorage is used, keep using that age group in setAge
   myAge = setAge(sessionStorage.getItem('selected'));
   var short = sessionStorage.getItem('test2');
+}
+
+// outcome history
+// uses sessionStorage to keep a history of outcomes
+
+if (sessionStorage.getItem("outcomeHistory") === null) {
+  sessionStorage.setItem("historyNothing", 0);
+  sessionStorage.setItem("historyIVA", 0);
+  sessionStorage.setItem("historyDeath", 0);
+  sessionStorage.setItem("historyHospital", 0);
+  sessionStorage.setItem("historyGames", 0);
+  sessionStorage.setItem("outcomeHistory", 1);
+  var hGames = parseInt(sessionStorage.getItem("historyGames"));
+  var hNothing = parseInt(sessionStorage.getItem("historyNothing"));
+  var hHospital = parseInt(sessionStorage.getItem("historyHospital"));
+  var hIVA = parseInt(sessionStorage.getItem("historyIVA"));
+  var hDeath = parseInt(sessionStorage.getItem("historyDeath"));
+} else {
+  var hGames = parseInt(sessionStorage.getItem("historyGames"));
+  var hNothing = parseInt(sessionStorage.getItem("historyNothing"));
+  var hHospital = parseInt(sessionStorage.getItem("historyHospital"));
+  var hIVA = parseInt(sessionStorage.getItem("historyIVA"));
+  var hDeath = parseInt(sessionStorage.getItem("historyDeath"));
 
 }
 
@@ -219,8 +266,13 @@ $('#game').wScratchPad({
         if ((percent > 40) && (rOutcome != '')) {
           $('.results-container').slideDown(1000, "swing");
           $('body').removeClass('not-selectable');
-            $('.results').html('Age: <b>' + myAge[0] + '</b> Outcome: <b>' + rOutcome + 
-              '<img id=winning src=assets/' + winTable + ' padding-top: 100 width=450>'
+            $('.results').html('<i class="fal fa-viruses"></i> ' + hGames +
+                ' <i class="fal fa-head-side-mask"></i> ' + hNothing +
+                ' <i class="far fa-tombstone" class="gamesymbol"></i> ' +hDeath +
+                ' <i class="fal fa-monitor-heart-rate"></i> ' + hIVA +
+                ' <i class="fal fa-hospital"></i> ' + hHospital + '<br>' +
+                'Age: <b>' + myAge[0] + '</b> Outcome: <b>' + rOutcome + 
+                '<img id=winning src=assets/' + winTable + ' padding-top: 100 width=450>'
               );
             }
         }
@@ -228,12 +280,21 @@ $('#game').wScratchPad({
 </script>
 
 <script>
-// show/hide the menu when hamburger menu is clicked
-$(".icon").on("click", function () {
+// show/hide the menu when set difficulty is clicked
+$(".setdiff").on("click", function () {
   $("#difficulties").slideToggle();
 });
 
 // hide the menu when an age bracket is clicked
+$(".ageselect").on("click", function(){
+    $("#difficulties").slideToggle(); 
+});
+// show/hide the menu when hamburger menu is clicked
+$(".icon").on("click", function () {
+  $("#options").slideToggle();
+});
+
+// hide the menu when an option is clicked
 $(".ageselect").on("click", function(){
     $("#difficulties").slideToggle(); 
 });

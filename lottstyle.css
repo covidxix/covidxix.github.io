@@ -41,18 +41,18 @@ p {
   display: none;
 }
 
+.topnav #options{
+  display: none;
+}
+
 /* Style navigation menu links */
 .topnav a {
   color: white;
-  background-color: #333;
+  background-color: #04AA6D;
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
   display: block;
-}
-
-.setdiff {
-  background-color: #04AA6D !important;
 }
 /* Style navigation menu links */
 .toplist a {
@@ -137,7 +137,7 @@ body {
 	font-family:'Open Sans', Arial,Sans-serif;
 	color:#333;
 	font-size:16px;
-	margin-top:20px;
+	margin-top:0px;
 }
 .btn {
   background:#56CFD2;
