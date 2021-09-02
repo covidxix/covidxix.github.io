@@ -10,7 +10,6 @@
   <link rel="icon" href="assets/shield-virus-light.svg" type="image/gif" sizes="16x16"> 
   <!-- import jQuery -->
   <script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-  
   <!-- The scratch off code, found at https://jennamolby.com/interactive-scratch-and-win-landing-page-tutorial/ -->
   <script type="text/javascript" src="wScratchPad.min.js"></script>
 
@@ -37,8 +36,8 @@
   <div id="difficulties">
     <a href="#" class="ageselect" onclick="setAge(getRandomIntInclusive(1, 11));sessionStorage.removeItem('selected');window.location.reload()">Random Age</a>
     <a href="#" class="ageselect" onclick="setAge(2);window.location.reload()">Simple (10-19)</a>
-    <a href="#" class="ageselect" onclick="setAge(3);window.location.reload()">Easy (20-29)</a>
-    <a href="#" class="ageselect" onclick="setAge(1);window.location.reload()">Very Easy (0-9)</a>
+    <a href="#" class="ageselect" onclick="setAge(3);window.location.reload()">Very Easy (20-29)</a>
+    <a href="#" class="ageselect" onclick="setAge(1);window.location.reload()">Easy (0-9)</a>
     <a href="#" class="ageselect" onclick="setAge(4);window.location.reload()">Medium (30-39)</a>
     <a href="#" class="ageselect" onclick="setAge(5);window.location.reload()">Hard (40-49)</a>
     <a href="#" class="ageselect" onclick="setAge(11);window.location.reload()">Very Hard (Any Age)</a>
@@ -49,10 +48,10 @@
     <a href="#" class="ageselect" onclick="setAge(9);window.location.reload()">Hell (80-89)</a>
   </div>
   <div id="options">
-    <a href="#" class="option" onclick="doOption(1)">Remove History</a>
+    <a href="#" class="option" onclick="doOption(1);window.location.reload()">Remove History</a>
   </div>
   <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
-  <a href="javascript:void(0);" class="icon">
+  <a href="javascript:void(0);" class="icon" title="Options">
     <i class="fa fa-bars"></i>
   </a>
 </div>
@@ -67,7 +66,7 @@
   <div class="results"></div>
     <a href="scratchoff.html" class="btn">Play Again</a>
     <a href="tables.html" class="btn">See win table</a>
-</div>
+  </div>
 </div>
  
 <script type="text/javascript">
@@ -211,18 +210,20 @@ if (sessionStorage.getItem("outcomeHistory") === null) {
   sessionStorage.setItem("historyHospital", 0);
   sessionStorage.setItem("historyGames", 0);
   sessionStorage.setItem("outcomeHistory", 1);
+  sessionStorage.setItem("scratchSize", 35);
   var hGames = parseInt(sessionStorage.getItem("historyGames"));
   var hNothing = parseInt(sessionStorage.getItem("historyNothing"));
   var hHospital = parseInt(sessionStorage.getItem("historyHospital"));
   var hIVA = parseInt(sessionStorage.getItem("historyIVA"));
   var hDeath = parseInt(sessionStorage.getItem("historyDeath"));
+  var scratchSize = parseInt(sessionStorage.getItem("scratchSize"));
 } else {
   var hGames = parseInt(sessionStorage.getItem("historyGames"));
   var hNothing = parseInt(sessionStorage.getItem("historyNothing"));
   var hHospital = parseInt(sessionStorage.getItem("historyHospital"));
   var hIVA = parseInt(sessionStorage.getItem("historyIVA"));
   var hDeath = parseInt(sessionStorage.getItem("historyDeath"));
-
+  var scratchSize = parseInt(sessionStorage.getItem("scratchSize"));
 }
 
 // if outcome is not nothing, run a second randomizer to find the actual outcome
@@ -263,14 +264,14 @@ $('#game').wScratchPad({
     
     scratchMove: function (e, percent) {
         // Show the plain-text promo code and call-to-action when the scratch area is 50% scratched
-        if ((percent > 40) && (rOutcome != '')) {
+        if ((percent > scratchSize) && (rOutcome != '')) {
           $('.results-container').slideDown(1000, "swing");
           $('body').removeClass('not-selectable');
-            $('.results').html('<i class="fal fa-viruses"></i> ' + hGames +
-                ' <i class="fal fa-head-side-mask"></i> ' + hNothing +
-                ' <i class="far fa-tombstone" class="gamesymbol"></i> ' +hDeath +
-                ' <i class="fal fa-monitor-heart-rate"></i> ' + hIVA +
-                ' <i class="fal fa-hospital"></i> ' + hHospital + '<br>' +
+            $('.results').html('<span title="Number of Attempts"><i class="fal fa-viruses"></i> ' + hGames + '</span>' +
+                ' <span title="Number of Nothing"><i class="fal fa-head-side-mask"></i> ' + hNothing + '</span>' + 
+                ' <span title="Number of Deaths"><i class="far fa-tombstone"></i> ' +hDeath + '</span>' +
+                ' <span title="Number of IVA"><i class="fal fa-monitor-heart-rate"></i> ' + hIVA + '</span>' +
+                ' <span title="Number of Hospitalized"><i class="fal fa-hospital"></i> ' + hHospital + '</span>' +'<br>' +
                 'Age: <b>' + myAge[0] + '</b> Outcome: <b>' + rOutcome + 
                 '<img id=winning src=assets/' + winTable + ' padding-top: 100 width=450>'
               );
@@ -295,8 +296,8 @@ $(".icon").on("click", function () {
 });
 
 // hide the menu when an option is clicked
-$(".ageselect").on("click", function(){
-    $("#difficulties").slideToggle(); 
+$(".option").on("click", function(){
+    $("#options").slideToggle(); 
 });
 </script>
 <a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fcovidxix.github.io%2Fscratchoff.html&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false"/></a>
